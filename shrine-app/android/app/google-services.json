@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "385900695408",
+    "project_id": "shrine-app-b9a7e",
+    "storage_bucket": "shrine-app-b9a7e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:385900695408:android:1073f5aef28c334180c9b5",
+        "android_client_info": {
+          "package_name": "com.example.shrine"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkUTf2u9G61vsETHJeyjfzptatOv-0LrM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
