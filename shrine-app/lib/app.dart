@@ -20,11 +20,10 @@ import 'colors.dart';
 import 'model/product.dart';
 import 'supplemental/cut_corners_border.dart';
 import 'category_menu_page.dart';
+import 'auth_gate.dart';
 
 // Convert ShrineApp to stateful widget (104)
 class ShrineApp extends StatefulWidget {
-  
-
   const ShrineApp({Key? key}) : super(key: key);
 
   @override
@@ -39,6 +38,7 @@ class _ShrineAppState extends State<ShrineApp> {
       _currentCategory = category;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -51,20 +51,22 @@ class _ShrineAppState extends State<ShrineApp> {
               //Make currentCategory field take _currentCategory (104)
               currentCategory: _currentCategory,
               //  Pass _currentCategory for frontLayer (104)
-              frontLayer: HomePage(category: _currentCategory,),
+              frontLayer: HomePage(
+                category: _currentCategory,
+              ),
               //  Change backLayer field value to CategoryMenuPage (104)
               backLayer: CategoryMenuPage(
-                currentCategory: _currentCategory, 
-                onCategoryTap: _onCategoryTap),
+                  currentCategory: _currentCategory,
+                  onCategoryTap: _onCategoryTap),
               frontTitle: const Text('SHRINE'),
               backTitle: const Text('MENU'),
             ),
       },
       //  Customize the theme (103)
       theme: _kShrineTheme,
+      home: const AuthGate(),
     );
   }
-  
 }
 
 // Build a Shrine Theme (103)
