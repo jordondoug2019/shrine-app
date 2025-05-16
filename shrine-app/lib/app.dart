@@ -44,10 +44,15 @@ class _ShrineAppState extends State<ShrineApp> {
     return MaterialApp(
       title: 'Shrine',
       initialRoute: '/login',
-      routes: {
-        '/login': (BuildContext context) => const LoginPage(),
+      onGenerateRoute: (RouteSettings settings) {
+        switch (settings.name) {
+
+       case '/login': 
+        return MaterialPageRoute(builder: (_) => const LoginPage());
         //  Change to a Backdrop with a HomePage frontLayer (104)
-        '/': (BuildContext context) => Backdrop(
+        case '/':
+        return MaterialPageRoute(
+          builder: (_)  => Backdrop(
               //Make currentCategory field take _currentCategory (104)
               currentCategory: _currentCategory,
               //  Pass _currentCategory for frontLayer (104)
@@ -57,10 +62,15 @@ class _ShrineAppState extends State<ShrineApp> {
               //  Change backLayer field value to CategoryMenuPage (104)
               backLayer: CategoryMenuPage(
                   currentCategory: _currentCategory,
-                  onCategoryTap: _onCategoryTap),
+                  onCategoryTap: _onCategoryTap
+                  ),
               frontTitle: const Text('SHRINE'),
               backTitle: const Text('MENU'),
             ),
+        );
+        default:
+        return null;
+        }
       },
       //  Customize the theme (103)
       theme: _kShrineTheme,
