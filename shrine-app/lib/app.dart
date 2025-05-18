@@ -13,13 +13,13 @@
 // limitations under the License.
 
 import 'package:flutter/material.dart';
-import 'backdrop.dart';
-import 'home.dart';
+//import 'backdrop.dart';
+//import 'home.dart';
 //import 'login.dart';
 import 'colors.dart';
-import 'model/product.dart';
+//import 'model/product.dart';
 import 'supplemental/cut_corners_border.dart';
-import 'category_menu_page.dart';
+//import 'category_menu_page.dart';
 import 'auth_gate.dart';
 
 // Convert ShrineApp to stateful widget (104)
@@ -31,52 +31,18 @@ class ShrineApp extends StatefulWidget {
 }
 
 class _ShrineAppState extends State<ShrineApp> {
-  Category _currentCategory = Category.all;
 
-  void _onCategoryTap(Category category) {
-    setState(() {
-      _currentCategory = category;
-    });
-  }
+
+
+  
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Shrine',
-      initialRoute: '/login',
-      //onGenerateRoute: callback function that Flutter calls when it needs to build a route
-      //gives full control to dyanmically build routes at runtime w/access to your instance variables and methods
-      onGenerateRoute: (RouteSettings settings) {
-        switch (settings.name) {
-
-       //case '/login': 
-        //return MaterialPageRoute(builder: (_) => const LoginPage());
-        //  Change to a Backdrop with a HomePage frontLayer (104)
-        case '/':
-        return MaterialPageRoute(
-          builder: (_)  => Backdrop(
-              //Make currentCategory field take _currentCategory (104)
-              currentCategory: _currentCategory,
-              //  Pass _currentCategory for frontLayer (104)
-              frontLayer: HomePage(
-                category: _currentCategory,
-              ),
-              //  Change backLayer field value to CategoryMenuPage (104)
-              backLayer: CategoryMenuPage(
-                  currentCategory: _currentCategory,
-                  onCategoryTap: _onCategoryTap
-                  ),
-              frontTitle: const Text('SHRINE'),
-              backTitle: const Text('MENU'),
-            ),
-        );
-        default:
-        return null;
-        }
-      },
-      //  Customize the theme (103)
+       home: AuthGate(),
       theme: _kShrineTheme,
-      home: const AuthGate(),
+     
     );
   }
 }
@@ -140,3 +106,38 @@ TextTheme _buildShrineTextTheme(TextTheme base) {
           displayColor: kShrineBrown900,
           bodyColor: kShrineBrown900);
 }
+
+
+
+// initialRoute: '/',
+      //onGenerateRoute: callback function that Flutter calls when it needs to build a route
+      //gives full control to dyanmically build routes at runtime w/access to your instance variables and methods
+     // onGenerateRoute: (RouteSettings settings) {
+        //switch (settings.name) {
+
+        //case '/': 
+        //return MaterialPageRoute(builder: (_) => const AuthGate());
+        //  Change to a Backdrop with a HomePage frontLayer (104)
+        //case '/home':
+        //return MaterialPageRoute(
+          //builder: (_)  => Backdrop(
+              //Make currentCategory field take _currentCategory (104)
+              //currentCategory: _currentCategory,
+              //  Pass _currentCategory for frontLayer (104)
+              //frontLayer: HomePage(
+              //  category: _currentCategory,
+             // ),
+              //  Change backLayer field value to CategoryMenuPage (104)
+             // backLayer: CategoryMenuPage(
+                  //currentCategory: _currentCategory,
+                 // onCategoryTap: _onCategoryTap
+                 // ),
+             // frontTitle: const Text('SHRINE'),
+             // backTitle: const Text('MENU'),
+            //),
+       // );
+       // default:
+        //return null;
+      //  }
+      //},
+      //  Customize the theme (103)

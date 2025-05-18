@@ -1,7 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+//import 'package:shrine/app.dart';
+//import 'package:shrine/auth_gate.dart';
 import 'package:shrine/colors.dart';
 import 'package:shrine/login.dart';
-
+//import 'package:shrine/main.dart';
+//import 'auth_gate.dart';
 import 'model/product.dart';
 
 //Backdrop appears behind all other content and components.
@@ -272,12 +276,13 @@ class _BackdropState extends State<
             Icons.login_rounded,
             semanticLabel: 'login',
           ),
-          onPressed: () {
+          onPressed: () async {
+            await FirebaseAuth.instance.signOut();
             //Add Open Login
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (BuildContext context) => LoginPage()),
-            );
+            //Navigator.push(
+              //context,
+              //MaterialPageRoute(builder: (BuildContext context) => ShrineApp()),
+            //);
           },
         ),
         IconButton(
