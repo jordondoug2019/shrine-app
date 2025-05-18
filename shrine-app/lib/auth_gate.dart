@@ -52,7 +52,15 @@ class AuthGate extends StatelessWidget {
                       style: TextStyle(color: Colors.grey)),
                 );
               },
-              
+              //for web or MacOS
+              sideBuilder: (context, shrinkOffset) {
+                return Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: AspectRatio(
+                      aspectRatio: 1,
+                      child: Image.asset('asset/diamond.png'),
+                    ));
+              },
             ); //SignInScreen is a widget that comes from the FlutterFire UI Pacckage
           }
           return const HomePage(); //else, it will return to the home screen that only authenticated users can access
