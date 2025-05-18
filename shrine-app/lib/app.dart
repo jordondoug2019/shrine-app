@@ -15,7 +15,7 @@
 import 'package:flutter/material.dart';
 import 'backdrop.dart';
 import 'home.dart';
-import 'login.dart';
+//import 'login.dart';
 import 'colors.dart';
 import 'model/product.dart';
 import 'supplemental/cut_corners_border.dart';
@@ -44,11 +44,13 @@ class _ShrineAppState extends State<ShrineApp> {
     return MaterialApp(
       title: 'Shrine',
       initialRoute: '/login',
+      //onGenerateRoute: callback function that Flutter calls when it needs to build a route
+      //gives full control to dyanmically build routes at runtime w/access to your instance variables and methods
       onGenerateRoute: (RouteSettings settings) {
         switch (settings.name) {
 
-       case '/login': 
-        return MaterialPageRoute(builder: (_) => const LoginPage());
+       //case '/login': 
+        //return MaterialPageRoute(builder: (_) => const LoginPage());
         //  Change to a Backdrop with a HomePage frontLayer (104)
         case '/':
         return MaterialPageRoute(
