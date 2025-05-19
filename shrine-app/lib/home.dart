@@ -14,7 +14,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:shrine/supplemental/asymmetric_view.dart';
-import 'package:firebase_ui_auth/firebase_ui_auth.dart';
+//import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'model/product.dart';
 import 'model/products_repository.dart';
 

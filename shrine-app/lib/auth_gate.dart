@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart' hide EmailAuthProvider;
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
+import 'package:firebase_ui_oauth_google/firebase_ui_oauth_google.dart';
 //import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -46,6 +47,7 @@ class _AuthGateState extends State<AuthGate> {
               // //If there user isnt authenticated it will return a Signinscreen widget
               providers: [
                 EmailAuthProvider(),
+                GoogleProvider(clientId: "385900695408-314lhdadm2kv4180gr08epf638v8e03g.apps.googleusercontent.com")
               ],
               //Builds the header of the screen
               headerBuilder: (context, constraints, shrinkOffset) {
