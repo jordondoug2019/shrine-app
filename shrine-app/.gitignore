@@ -51,3 +51,4 @@ app.*.map.json
 lib/firebase_options.dart
 shrine-app/ios/Runner/GoogleService-Info.plist
 shrine-app/macos/Runner/GoogleService-Info.plist
+shrine-app/ios/Runner/Info.plist
