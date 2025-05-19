@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
 //import 'package:shrine/app.dart';
 //import 'package:shrine/auth_gate.dart';
@@ -280,8 +281,8 @@ class _BackdropState extends State<
             await FirebaseAuth.instance.signOut();
             //Add Open Login
             //Navigator.push(
-              //context,
-              //MaterialPageRoute(builder: (BuildContext context) => ShrineApp()),
+            //context,
+            //MaterialPageRoute(builder: (BuildContext context) => ShrineApp()),
             //);
           },
         ),
@@ -310,9 +311,42 @@ class _BackdropState extends State<
               MaterialPageRoute(builder: (BuildContext context) => LoginPage()),
             );
           },
-        )
+        ),
+        //Added User Profile Screeen
+        IconButton(
+            icon: const Icon(Icons.person),
+            //when the icon is pressed, navigates to user profile
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  //routes to Profilescreen
+                  MaterialPageRoute(
+                    builder: (context) => ProfileScreen(
+                      appBar: AppBar(
+                        title: const Text('User Profile'),
+                        ),
+                        //SignOut Button. 
+                      actions: [
+                        SignedOutAction((context) {
+                          Navigator.of(context).pop();
+                        })
+                      ],
+                  
+                     
+                    ),
+
+                  )
+                  );
+            }
+            ),
+                  
+            
       ],
+      //does not provide a back button 
+      automaticallyImplyLeading: false,
+      
     );
+
     return Scaffold(
         appBar: appBar,
         //return a layoutBuilderWidget
@@ -365,4 +399,3 @@ class _FrontLayer extends StatelessWidget {
         ));
   }
 }
-

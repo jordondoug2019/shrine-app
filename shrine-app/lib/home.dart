@@ -14,14 +14,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:shrine/supplemental/asymmetric_view.dart';
-
+import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'model/product.dart';
 import 'model/products_repository.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage(
-      {this.category = Category.all,
-      Key? key})
+  const HomePage({this.category = Category.all, Key? key})
       //required Category currentCategory,
       //required void Function(Category category) onCategoryTap})
       : super(key: key);
@@ -37,3 +35,4 @@ class HomePage extends StatelessWidget {
     // Pass Category variable to AsymmetricView (104)
   }
 }
+

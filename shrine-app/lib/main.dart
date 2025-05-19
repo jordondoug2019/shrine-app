@@ -27,6 +27,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   // print("main is running");
+  // Automatically signouts after resfresh
     await FirebaseAuth.instance.signOut();
   runApp(const ShrineApp());
 }

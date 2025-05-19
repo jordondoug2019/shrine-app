@@ -40,6 +40,7 @@ class _ShrineAppState extends State<ShrineApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Shrine',
+      //1st screen is the sign in page
        home: AuthGate(),
       theme: _kShrineTheme,
      
