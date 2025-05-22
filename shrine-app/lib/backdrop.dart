@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +10,7 @@ import 'package:shrine/login.dart';
 //import 'package:shrine/main.dart';
 //import 'auth_gate.dart';
 import 'model/product.dart';
+import 'model/products_repository.dart';
 
 //Backdrop appears behind all other content and components.
 //It is composed of 2 layers: -BackLayer(Displays actions and filters) -frontLayer(Displays content)
@@ -261,7 +264,7 @@ class _BackdropState extends State<
       elevation: 0.0,
       titleSpacing: 0.0,
       backgroundColor: kShrinePink100,
-      
+
       //Replace leading menu icon with IconButton
       // remove leading property
       //create title with _BackdropTitle param
@@ -288,33 +291,62 @@ class _BackdropState extends State<
             //);
           },
         ),
-        
-        IconButton(
-          icon: const Icon(
-            Icons.search,
-            semanticLabel: 'search',
-          ),
-          onPressed: () {
-           showDialog(
-            context: context, 
-            builder: (BuildContext context){
-            final controller = SearchController();
-            return AlertDialog(
-              content: SearchBar(
-                controller: controller,
-                padding: WidgetStateProperty.all(const EdgeInsets.symmetric(horizontal: 4.0)),
-                onTap: () {
-                  controller.openView();
-                },
-                ),
-            
-              );
+        SearchAnchor(builder: (
+          BuildContext context,
+          SearchController controller,
+        ) {
+          return IconButton(
+            icon: const Icon(
+              Icons.search,
+              semanticLabel: 'search',
+            ),
+            onPressed: () {
+              controller.openView();
             },
+          );
+        }, suggestionsBuilder:
+            (BuildContext context, SearchController controller) {
+          final query = controller.text.toLowerCase();
+          final suggestions = ProductsRepository.loadProducts(Category.all)
+              .where((product) => product.name.toLowerCase().contains(query))
+              .toList();
+
+          return suggestions.map((product) {
+            return ListTile(
+              title: Text(product.name),
+              subtitle: Text('\$${product.price.toStringAsFixed(2)}'),
+              onTap: () {
+                controller.closeView(product.name);
+              },
             );
-            
-          },
-        ),
-        
+          });
+        }),
+
+         //IconButton(
+        //  icon: const Icon(
+            //Icons.search,
+            //semanticLabel: 'search',
+         // ),
+         // onPressed: () {
+        //     showDialog(
+        //       context: context,
+        //       builder: (BuildContext context) {
+        //         final controller = SearchController();
+        //         return AlertDialog(
+        //           content: SearchBar(
+        //             controller: controller,
+        //             padding: WidgetStateProperty.all(
+        //                 const EdgeInsets.symmetric(horizontal: 4.0)),
+        //             onTap: () {
+        //               controller.openView();
+        //             },
+        //           ),
+        //         );
+        //       },
+        //     );
+        //   },
+        // ),
+
         IconButton(
           icon: const Icon(
             Icons.tune,
@@ -340,27 +372,19 @@ class _BackdropState extends State<
                     builder: (context) => ProfileScreen(
                       appBar: AppBar(
                         title: const Text('User Profile'),
-                        ),
-                        //SignOut Button. 
+                      ),
+                      //SignOut Button.
                       actions: [
                         SignedOutAction((context) {
                           Navigator.of(context).pop();
                         })
                       ],
-                  
-                     
                     ),
-
-                  )
-                  );
-            }
-            ),
-                  
-            
+                  ));
+            }),
       ],
-      //does not provide a back button 
+      //does not provide a back button
       automaticallyImplyLeading: false,
-      
     );
 
     return Scaffold(
