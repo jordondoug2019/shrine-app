@@ -261,6 +261,7 @@ class _BackdropState extends State<
       elevation: 0.0,
       titleSpacing: 0.0,
       backgroundColor: kShrinePink100,
+      
       //Replace leading menu icon with IconButton
       // remove leading property
       //create title with _BackdropTitle param
@@ -271,6 +272,7 @@ class _BackdropState extends State<
         frontTitle: widget.frontTitle,
         backTitle: widget.backTitle,
       ),
+
       actions: <Widget>[
         IconButton(
           icon: const Icon(
@@ -286,19 +288,33 @@ class _BackdropState extends State<
             //);
           },
         ),
+        
         IconButton(
           icon: const Icon(
             Icons.search,
             semanticLabel: 'search',
           ),
           onPressed: () {
-            // Add Open Login
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (BuildContext context) => LoginPage()),
+           showDialog(
+            context: context, 
+            builder: (BuildContext context){
+            final controller = SearchController();
+            return AlertDialog(
+              content: SearchBar(
+                controller: controller,
+                padding: WidgetStateProperty.all(const EdgeInsets.symmetric(horizontal: 4.0)),
+                onTap: () {
+                  controller.openView();
+                },
+                ),
+            
+              );
+            },
             );
+            
           },
         ),
+        
         IconButton(
           icon: const Icon(
             Icons.tune,
