@@ -291,6 +291,7 @@ class _BackdropState extends State<
             //);
           },
         ),
+        //creates a widget which can open a search view route
         SearchAnchor(builder: (
           BuildContext context,
           SearchController controller,
@@ -304,13 +305,16 @@ class _BackdropState extends State<
               controller.openView();
             },
           );
-        }, suggestionsBuilder:
+        },//Creates auto suggestions within search functions
+         suggestionsBuilder:
             (BuildContext context, SearchController controller) {
+              //automatically makes user input lower case 
           final query = controller.text.toLowerCase();
+          //auto suggest all products
           final suggestions = ProductsRepository.loadProducts(Category.all)
               .where((product) => product.name.toLowerCase().contains(query))
               .toList();
-
+          //Filtering as user inputs text
           return suggestions.map((product) {
             return ListTile(
               title: Text(product.name),
@@ -321,31 +325,6 @@ class _BackdropState extends State<
             );
           });
         }),
-
-         //IconButton(
-        //  icon: const Icon(
-            //Icons.search,
-            //semanticLabel: 'search',
-         // ),
-         // onPressed: () {
-        //     showDialog(
-        //       context: context,
-        //       builder: (BuildContext context) {
-        //         final controller = SearchController();
-        //         return AlertDialog(
-        //           content: SearchBar(
-        //             controller: controller,
-        //             padding: WidgetStateProperty.all(
-        //                 const EdgeInsets.symmetric(horizontal: 4.0)),
-        //             onTap: () {
-        //               controller.openView();
-        //             },
-        //           ),
-        //         );
-        //       },
-        //     );
-        //   },
-        // ),
 
         IconButton(
           icon: const Icon(
