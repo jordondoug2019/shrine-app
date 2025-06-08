@@ -36,8 +36,9 @@ class TwoProductCardColumn extends StatelessWidget {
         builder: (BuildContext context, BoxConstraints constraints) {
       const spacerHeight = 44.0;
 
-      double heightOfCards = (constraints.biggest.height - spacerHeight) / 2.0;
-      double heightOfImages = heightOfCards - ProductCard.kTextBoxHeight;
+     double heightOfCards = ((constraints.biggest.height - spacerHeight) / 2.0).clamp(0.0, double.infinity);
+double heightOfImages = (heightOfCards - ProductCard.kTextBoxHeight).clamp(0.0, double.infinity);
+
       // Change imageAspectRatio calculation (104)
       double imageAspectRatio = heightOfImages >= 0.0
           ? constraints.biggest.width / heightOfImages
@@ -54,22 +55,15 @@ class TwoProductCardColumn extends StatelessWidget {
             child: top != null
                 ? GestureDetector(
                     onTap: () => onProductTap(top!),
-                    child: ProductCard(
-                      imageAspectRatio: imageAspectRatio,
-                      product: top!,
-                    ))
-                : SizedBox(
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(maxWidth: 550),
+                      child: ProductCard(product: top!), 
+                    ),
+                    ):SizedBox(
                     height: heightOfCards,
-                  ),
-          ),
-          const SizedBox(height: spacerHeight),
-          Padding(
-            padding: const EdgeInsetsDirectional.only(end: 28.0),
-            child: ProductCard(
-              imageAspectRatio: imageAspectRatio,
-              product: bottom,
-            ),
-          ),
+            )
+            )
+           
         ],
       );
     });

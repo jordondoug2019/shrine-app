@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 //import 'package:shrine/app.dart';
 //import 'package:shrine/auth_gate.dart';
 import 'package:shrine/colors.dart';
-import 'package:shrine/login.dart';
 //import 'package:shrine/main.dart';
 //import 'auth_gate.dart';
 import 'model/product.dart';

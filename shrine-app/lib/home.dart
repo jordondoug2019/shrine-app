@@ -18,7 +18,7 @@ import 'package:shrine/supplemental/asymmetric_view.dart';
 //import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'model/product.dart';
 import 'model/products_repository.dart';
-import 'product_detail_page.dart';
+
 
 class HomePage extends StatelessWidget {
   const HomePage({this.category = Category.all, Key? key})

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shrine/colors.dart';
-import 'package:shrine/login.dart';
 import 'model/product.dart';
-import 'model/products_repository.dart';
+
 
 class ProductDetailPage extends StatelessWidget {
   final Product product;
@@ -45,10 +44,7 @@ class ProductDetailPage extends StatelessWidget {
                       Align(
                         alignment: Alignment.bottomCenter,
                         child: Text(' ${product.description}')
-                      )
-                    
-                  
-                  
+                      )     
           ],
                 // Text("\$${product.price}",
                   //     style: TextStyle(fontSize: 20, color: kShrinePurple)),
