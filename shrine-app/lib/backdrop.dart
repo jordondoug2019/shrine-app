@@ -11,6 +11,7 @@ import 'package:shrine/login.dart';
 //import 'auth_gate.dart';
 import 'model/product.dart';
 import 'model/products_repository.dart';
+import "product_page.dart";
 
 //Backdrop appears behind all other content and components.
 //It is composed of 2 layers: -BackLayer(Displays actions and filters) -frontLayer(Displays content)
@@ -305,10 +306,10 @@ class _BackdropState extends State<
               controller.openView();
             },
           );
-        },//Creates auto suggestions within search functions
-         suggestionsBuilder:
-            (BuildContext context, SearchController controller) {
-              //automatically makes user input lower case 
+        }, //Creates auto suggestions within search functions
+            suggestionsBuilder:
+                (BuildContext context, SearchController controller) {
+          //automatically makes user input lower case
           final query = controller.text.toLowerCase();
           //auto suggest all products
           final suggestions = ProductsRepository.loadProducts(Category.all)
@@ -321,24 +322,17 @@ class _BackdropState extends State<
               subtitle: Text('\$${product.price.toStringAsFixed(2)}'),
               onTap: () {
                 controller.closeView(product.name);
+                print('Tapped on product: ${product.name}');
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProductDetailPage(product: product),
+                    ));
               },
             );
           });
         }),
 
-        IconButton(
-          icon: const Icon(
-            Icons.tune,
-            semanticLabel: 'filter',
-          ),
-          onPressed: () {
-            // Add Open Login
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (BuildContext context) => LoginPage()),
-            );
-          },
-        ),
         //Added User Profile Screeen
         IconButton(
             icon: const Icon(Icons.person),
