@@ -19,8 +19,11 @@ import 'product_columns.dart';
 
 class AsymmetricView extends StatelessWidget {
   final List<Product> products;
+  final void Function(Product) onProductTap; //Adding callback
 
-  const AsymmetricView({Key? key, required this.products}) : super(key: key);
+  const AsymmetricView(
+      {Key? key, required this.products, required this.onProductTap})
+      : super(key: key);
 
   List<Widget> _buildColumns(BuildContext context) {
     if (products.isEmpty) {
@@ -45,12 +48,14 @@ class AsymmetricView extends StatelessWidget {
             bottom: products[bottom],
             top: products.length - 1 >= bottom + 1
                 ? products[bottom + 1]
-                : null);
+                : null,
+                onProductTap: onProductTap,);
         width += 32.0;
       } else {
         /// Odd cases
         column = OneProductCardColumn(
           product: products[_oddCasesIndex(index)],
+          onProductTap: onProductTap,
         );
       }
       return SizedBox(

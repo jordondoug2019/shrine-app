@@ -17,6 +17,7 @@ class ProductDetailPage extends StatelessWidget {
             child: Center(
                 child: Column(
           children: [
+            SizedBox(height: 35,),
             Image.asset(product.assetName, package: product.assetPackage),
             Padding(
               padding: const EdgeInsets.all(20.0),
@@ -29,12 +30,32 @@ class ProductDetailPage extends StatelessWidget {
                       style:
                           TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
                   SizedBox(height: 8),
-                  Text("\$${product.price}",
-                      style: TextStyle(fontSize: 20, color: kShrinePurple)),
-                  SizedBox(height: 16),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Container(
+                      child: Text("\$${product.price}",
+                      style: TextStyle(fontSize: 20, color: kShrinePurple))
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.bottomRight,
+                      child:  ElevatedButton(onPressed: () {}, child: Text('Add to Cart'))
+                      ),
+                      SizedBox(height: 20,),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Text(' ${product.description}')
+                      )
+                    
                   
-                  ElevatedButton(onPressed: () {}, child: Text('Add to Cart'))
-                ],
+                  
+          ],
+                // Text("\$${product.price}",
+                  //     style: TextStyle(fontSize: 20, color: kShrinePurple)),
+                  // SizedBox(height: 16),
+                  
+                  // ElevatedButton(onPressed: () {}, child: Text('Add to Cart'))
+                // ],
               ),
             ),
           ],

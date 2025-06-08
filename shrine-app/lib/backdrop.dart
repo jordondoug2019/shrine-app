@@ -11,7 +11,7 @@ import 'package:shrine/login.dart';
 //import 'auth_gate.dart';
 import 'model/product.dart';
 import 'model/products_repository.dart';
-import "product_page.dart";
+import "product_detail_page.dart";
 
 //Backdrop appears behind all other content and components.
 //It is composed of 2 layers: -BackLayer(Displays actions and filters) -frontLayer(Displays content)

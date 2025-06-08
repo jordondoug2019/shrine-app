@@ -13,10 +13,12 @@
 // limitations under the License.
 
 import 'package:flutter/material.dart';
+import 'package:shrine/product_detail_page.dart';
 import 'package:shrine/supplemental/asymmetric_view.dart';
 //import 'package:firebase_ui_auth/firebase_ui_auth.dart';
 import 'model/product.dart';
 import 'model/products_repository.dart';
+import 'product_detail_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({this.category = Category.all, Key? key})
@@ -29,10 +31,16 @@ class HomePage extends StatelessWidget {
   // Add a variable for Category (104)
   @override
   Widget build(BuildContext context) {
+    final products = ProductsRepository.loadProducts(category);
     // Return an AsymmetricView (104)
     //  Return an AsymmetricView (104)
-    return AsymmetricView(products: ProductsRepository.loadProducts(category));
-    // Pass Category variable to AsymmetricView (104)
+    return AsymmetricView(
+        products: products,
+        onProductTap: (product) {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (_) => ProductDetailPage(product: product)));
+        });
   }
 }
-

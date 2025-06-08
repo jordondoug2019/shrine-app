@@ -22,11 +22,13 @@ class TwoProductCardColumn extends StatelessWidget {
   const TwoProductCardColumn({
     required this.bottom,
     this.top,
+    required this.onProductTap,
     Key? key,
   }) : super(key: key);
 
   final Product bottom;
   final Product? top;
+  final void Function(Product) onProductTap;
 
   @override
   Widget build(BuildContext context) {
@@ -37,22 +39,25 @@ class TwoProductCardColumn extends StatelessWidget {
       double heightOfCards = (constraints.biggest.height - spacerHeight) / 2.0;
       double heightOfImages = heightOfCards - ProductCard.kTextBoxHeight;
       // Change imageAspectRatio calculation (104)
-      double imageAspectRatio = heightOfImages >= 0.0 ? 
-      constraints.biggest.width /heightOfImages : 49.0 / 33.0;
+      double imageAspectRatio = heightOfImages >= 0.0
+          ? constraints.biggest.width / heightOfImages
+          : 49.0 / 33.0;
 
       // Replace Column with a ListView (104)
       return ListView(
-       // mainAxisAlignment: MainAxisAlignment.center,
+        // mainAxisAlignment: MainAxisAlignment.center,
         //crossAxisAlignment: CrossAxisAlignment.center,
         physics: const ClampingScrollPhysics(),
         children: <Widget>[
           Padding(
             padding: const EdgeInsetsDirectional.only(start: 28.0),
             child: top != null
-                ? ProductCard(
-                    imageAspectRatio: imageAspectRatio,
-                    product: top!,
-                  )
+                ? GestureDetector(
+                    onTap: () => onProductTap(top!),
+                    child: ProductCard(
+                      imageAspectRatio: imageAspectRatio,
+                      product: top!,
+                    ))
                 : SizedBox(
                     height: heightOfCards,
                   ),
@@ -72,10 +77,12 @@ class TwoProductCardColumn extends StatelessWidget {
 }
 
 class OneProductCardColumn extends StatelessWidget {
-  const OneProductCardColumn({required this.product, Key? key})
+  const OneProductCardColumn(
+      {required this.product, required this.onProductTap, Key? key})
       : super(key: key);
 
   final Product product;
+  final void Function(Product) onProductTap;
 
   @override
   Widget build(BuildContext context) {
@@ -84,15 +91,20 @@ class OneProductCardColumn extends StatelessWidget {
       physics: const ClampingScrollPhysics(),
       reverse: true,
       children: <Widget>[
-        ConstrainedBox(constraints:
-        const BoxConstraints(
-          maxWidth: 550,
-        ), 
-        child: ProductCard(product: product,)),
-       
-        const SizedBox(
+          GestureDetector(
+            onTap: () => onProductTap(product), 
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(
+              maxWidth: 550),
+              child: ProductCard(
+              product: product,
+          ),  
+            )
+            ),
+         SizedBox(
           height: 40.0,
         ),
+      
       ],
     );
   }
